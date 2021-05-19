@@ -84,58 +84,22 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . ~/.autojump/etc/profile.d/autojump.sh
 
-alias cls='clear'
 alias ls='ls -G'
 alias ll='ls -al'
 alias la='ls -a'
 alias grep="grep --color=auto"
-
-
 alias vg='vagrant'
+alias ggrep='git grep'
 
-export SYSTEMC_HOME=/usr/local/Cellar/systemc/2.3.1
-export OCP_HOME=/Library/OCPIP
-export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
-export PATH=$PATH:/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin
-export PATH=/usr/local/opt/llvm/bin:$PATH
-export PATH=$PATH:~/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin
-export PATH=$PATH:/Users/hhsu/Projects/llvm/build/bin
-
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Devel
-export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
-source /usr/local/bin/virtualenvwrapper_lazy.sh
+[[ $(uname) = Darwin ]] && alias vi='mvim -v'
+[[ $(uname) = Linux ]] && alias vi='vim'
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 
-alias cl='pbpaste | pygmentize -O"style=tango, fontface=Monaco" -f rtf -g  | pbcopy'
-alias clcpp='pbpaste | pygmentize -l cpp -O"style=tango, fontface=Monaco, bg=dark" -f rtf -g  | pbcopy'
-alias clpy='pbpaste | pygmentize -l python -O"style=tango, fontface=Monaco" -f rtf -g  | pbcopy'
-
-alias sb='stack build'
-
-# to use GCC instead of llvm
-# alias gcc='gcc-9'
-# alias cc='gcc-9'
-# alias g++='g++-9'
-# alias c++='c++-9'
-
-function clp(){
-	pbpaste | pygmentize -O"style=tango, fontface=Menlo" -f rtf -s -l $1  | pbcopy
-}
-
-
-fpath=(/usr/local/share/zsh-completions $fpath)
-#export PATH="/usr/local/sbin:$PATH"
-
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward
 
-alias ggrep='git grep'
-alias ub='ssh hsuhau@127.0.0.1 -p 2222'
-export PATH="/usr/local/opt/sqlite/bin:$PATH"
-alias vi='mvim -v'
+source ~/.zshrc.local

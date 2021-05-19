@@ -1,4 +1,5 @@
 # Path to your oh-my-zsh installation.
+export ZSH=$HOME/.oh-my-zsh
 export ZSH=/Users/hhsu/.oh-my-zsh
 
 # Set name of the theme to load.
@@ -51,6 +52,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git zsh-syntax-highlighting zsh-autosuggestions zsh-completions)
 
+autoload -U compinit && compinit
 # User configuration
 
 #export PATH="/Users/hhsu/.local/bin:$PATH"
@@ -98,8 +100,9 @@ alias ggrep='git grep'
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
+export PROMPT='${ret_status} %m %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'
 
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward
 
-source ~/.zshrc.local
+[-f ~/.zshrc.local ] && source ~/.zshrc.local

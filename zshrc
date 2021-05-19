@@ -99,7 +99,9 @@ alias ggrep='git grep'
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
-export PROMPT='${ret_status} %m %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'
+
+local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
+export PROMPT='${ret_status} %m %{$fg[cyan]%}%~%{$reset_color%} $(git_prompt_info)'
 
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward

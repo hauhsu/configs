@@ -105,4 +105,4 @@ export PROMPT='${ret_status} %m %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_inf
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward
 
-[-f ~/.zshrc.local ] && source ~/.zshrc.local
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local

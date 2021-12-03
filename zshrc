@@ -86,7 +86,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 
-alias ls='ls -G'
+alias ls='ls -G --color'
 alias ll='ls -al'
 alias la='ls -a'
 alias grep="grep --color=auto"

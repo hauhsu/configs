@@ -7,6 +7,7 @@
 	ci = commit
 	co = checkout
 	cp = cherry-pick
+	dfc = diff --cached
 	rb = rebase
 	rba = rebase --abort
 	rbc = rebase --continue

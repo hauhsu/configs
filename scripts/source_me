@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+SCRIPTS_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
 link() {
 	local src="$(pwd)/$1"
 	local dst="$HOME/.$1"
@@ -26,15 +28,17 @@ clone_zsh_plugins() {
 	git clone https://github.com/zsh-users/zsh-completions \
 		${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions || \
 	echo "[INFO] Already cloned zsh-completions."
-
-
 }
 
+
 main() {
-	install_vim_plugged_manager
-	clone_zsh_plugins
-	for config in zshrc vimrc; do
-		link $config
+	for config in $SCRIPTS_DIR/../* ; do
+		if [[ -f $config && $config != "README.md" ]]; then
+			if [[ -f $SCRIPTS_DIR/pre_$config ]]; then
+				$SCRIPTS_DIR/pre_$config
+			fi
+			link $config
+		fi
 	done
 
 }

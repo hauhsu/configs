@@ -7,8 +7,13 @@ LINKED_CONFIGS=()
 link() {
 	local src="$1"
 	local dst="$HOME/.$(basename $1)"
+	local force_update=${2:-false}
 	if [[ -f $dst || -L $dst ]]; then
-		echo "[INFO] \"$dst\" already exists, skip linking \"$src\"."
+		if [[ $force_update == true ]]; then
+			echo "[WRNING] \"$dst\" already exists, backup as \"$dst.backup\"."
+		else
+			echo "[INFO] \"$dst\" already exists, skip linking \"$src\"."
+		fi
 		return
 	fi
 	echo "[INFO] linking $src to $dst."
@@ -17,6 +22,7 @@ link() {
 }
 
 main() {
+	local force_update=${1:-false}
 	for config in $SCRIPTS_DIR/../* ; do
 		if [[ -f $config && $config != *README.md* ]]; then
 			pre=$SCRIPTS_DIR/pre_$(basename $config)
@@ -24,7 +30,7 @@ main() {
 				echo "[INFO] Executing $pre"
 				$pre
 			fi
-			link $config
+			link $config $force_update
 		fi
 	done
 

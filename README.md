@@ -4,13 +4,13 @@ This repository installs configuration files for tools like zsh, vim, git, etc.
 
 # Usage
 
-Just source *source_me* script in scripts directory:
+Execute `install` script in scripts directory:
 
 ```
-$ source scripts/source_me
+$ scripts/install
 ```
 
-# Rules
+# Install Rules for Config Files
 
 For each files in root directory (except this *README.md*) would be soft linked
 to `$HOME` with dot (`.`) prefix. For example, *vimrc* is linked to *~/.vimrc*.

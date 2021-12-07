@@ -92,6 +92,9 @@ alias la='ls -a'
 alias grep="grep --color=auto"
 alias vg='vagrant'
 alias ggrep='git grep'
+alias tn='tmux new -s'
+alias ta='tmux attach-session -t'
+alias tl='tmux ls'
 
 [[ $(uname) = Darwin ]] && alias vi='mvim -v'
 [[ $(uname) = Linux ]] && alias vi='vim'

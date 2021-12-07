@@ -75,8 +75,9 @@ let g:pandoc_no_folding = 1
 "Git wrapper
 Plug 'tpope/vim-fugitive'
 set diffopt+=vertical
-nnoremap <leader>gs :Gstatus<cr>
-nnoremap <leader>gc :Gcommit -s<cr>
+nnoremap <leader>gs :Git<cr>
+nnoremap <leader>gc :Git commit -s<cr>
+nnoremap <leader>gb :Git blame<cr>
 
 
 

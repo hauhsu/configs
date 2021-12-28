@@ -100,7 +100,7 @@ Plug 'tpope/vim-commentary'
 Plug 'dkprice/vim-easygrep'
 
 "Auto pair
-Plug 'jiangmiao/auto-pairs'
+"Plug 'jiangmiao/auto-pairs'
 
 
 "

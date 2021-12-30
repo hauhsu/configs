@@ -255,6 +255,8 @@ nnoremap <leader>dp :diffput<CR>
 nnoremap <leader>dg :diffget<CR>
 nnoremap <leader>df :windo diffthis<CR>
 
+" turn on/off spell
+nnoremap <leader>sp :set spell!<CR>
 
 " show function name in status bar
 fun! ShowFuncName()

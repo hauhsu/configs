@@ -14,3 +14,10 @@
 	rbi = rebase --interactive
 	rbs = rebase --skip
 	st = status
+	sb = submodule
+[color]
+	ui = auto
+[core]
+	editor = vim
+[pull]
+	ff = only

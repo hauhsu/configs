@@ -29,6 +29,7 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 nnoremap <leader>sy :SyntasticToggleMode<CR>
+let g:syntastic_python_checkers = ['python', 'pylint']
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -121,9 +122,17 @@ Plug 'martinda/Jenkinsfile-vim-syntax'
 " Arm asm
 Plug 'ARM9/arm-syntax-vim'
 
+" Yaml folding
+Plug 'pedrohdz/vim-yaml-folds'
+
+" Show indent
+Plug 'Yggdroot/indentLine'
+nnoremap <leader>id :IndentLinesToggle<CR>
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
+
 " All of your Plugs must be added before the following line
 call plug#end()
-
 
 
 
@@ -148,7 +157,8 @@ set autoindent
 set backspace=indent,eol,start
 set ruler
 set noexpandtab
-"set mouse=a
+set mouse=r
+"set cursorcolumn
 "
 set statusline+=%F
 
@@ -157,7 +167,7 @@ set statusline+=%F
 au BufRead,BufNewFile *.cpp,*.hpp set cin ai nu sw=2 ts=2 
 au BufRead,BufNewFile *.sh set cin ai nu sw=4 ts=4 expandtab
 au BufRead,BufNewFile *.v set cin ai et nu sw=2 ts=2
-au BufRead,BufNewFile *.c,*.h set cin ai nu sw=4 ts=4 noexpandtab
+au BufRead,BufNewFile *.c,*.h set cin ai nu sw=4 ts=4 expandtab
 au BufRead,BufNewFile *.py set ai et nu sw=4 ts=4 tw=80 colorcolumn=80
 au BufRead,BufNewFile *.pl set ai et nu sw=2 ts=2 tw=80 expandtab
 au BufRead,BufNewFile *.hs set ai et nu sw=4 ts=4 tw=80
@@ -165,8 +175,12 @@ au BufRead,BufNewFile *.sc set ai et nu sw=4 ts=4 tw=80 filetype=scala
 au BufRead,BufNewFile *.rst set ai et nu sw=4 ts=4 tw=80 spell
 au BufRead,BufNewFile *.tex set ai et nu sw=4 ts=4 tw=80 spell
 au BufRead,BufNewFile *.exp set filetype=tcl sw=8 ts=8 noexpandtab
-au BufRead,BufNewFile Jenkinsfile.* set filetype=Jenkinsfile sw=2 ts=2 noexpandtab
+au BufRead,BufNewFile Jenkinsfile.* set filetype=Jenkinsfile sw=4 ts=4 expandtab
+au BufRead,BufNewFile *.jenkinsfile set filetype=Jenkinsfile sw=4 ts=4 expandtab
+au BufRead,BufNewFile *.groovy set filetype=Jenkinsfile sw=4 ts=4 expandtab
+au BufRead,BufNewFile *.xml set filetype=xml sw=2 ts=2 expandtab
 au BufNewFile,BufRead *.s,*.S set filetype=arm " arm = armv6/7
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 
 "Edit and source vimrc
@@ -257,6 +271,9 @@ nnoremap <leader>df :windo diffthis<CR>
 
 " turn on/off spell
 nnoremap <leader>sp :set spell!<CR>
+
+" Open the file under cursor in a new tab
+nnoremap gf <C-W>gf
 
 " show function name in status bar
 fun! ShowFuncName()

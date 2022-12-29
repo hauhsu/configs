@@ -86,15 +86,16 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 
-alias ls='ls -G --color'
-alias ll='ls -al'
-alias la='ls -a'
+alias ls='ls -G --color -v'
+alias ll='ls -alv'
+alias la='ls -av'
 alias grep="grep --color=auto"
 alias vg='vagrant'
 alias ggrep='git grep'
 alias tn='tmux new -s'
 alias ta='tmux attach-session -t'
 alias tl='tmux ls'
+alias rp='realpath'
 
 [[ $(uname) = Darwin ]] && alias vi='mvim -v'
 [[ $(uname) = Linux ]] && alias vi='vim'

@@ -3,6 +3,7 @@
 	email = hau.hsu@sifive.com
 	username = hau-hsu
 [alias]
+	am = commit --amend
 	br = branch
 	ci = commit
 	co = checkout
@@ -15,9 +16,12 @@
 	rbs = rebase --skip
 	st = status
 	sb = submodule
+	unstage = reset HEAD --
 [color]
 	ui = auto
 [core]
 	editor = vim
 [pull]
 	ff = only
+[init]
+	defaultBranch = main

@@ -96,6 +96,7 @@ alias tn='tmux new -s'
 alias ta='tmux attach-session -t'
 alias tl='tmux ls'
 alias rp='realpath'
+alias ccat='pygmentize -g -O style=material,linenos=1'
 
 [[ $(uname) = Darwin ]] && alias vi='mvim -v'
 [[ $(uname) = Linux ]] && alias vi='vim'
@@ -105,7 +106,7 @@ export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 
 local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
-export PROMPT='${ret_status} %m %{$fg[cyan]%}%~%{$reset_color%} $(git_prompt_info)'
+export PROMPT='${ret_status} %m %{$fg[yellow]%}[%D{%f/%m/%y} %D{%L:%M:%S}] %{$fg[cyan]%}%~%{$reset_color%} $(git_prompt_info)'
 
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward

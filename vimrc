@@ -131,6 +131,11 @@ nnoremap <leader>id :IndentLinesToggle<CR>
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 
+" Search in Vim
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+
 " All of your Plugs must be added before the following line
 call plug#end()
 
@@ -167,7 +172,7 @@ set statusline+=%F
 au BufRead,BufNewFile *.cpp,*.hpp set cin ai nu sw=2 ts=2 
 au BufRead,BufNewFile *.sh set cin ai nu sw=4 ts=4 expandtab
 au BufRead,BufNewFile *.v set cin ai et nu sw=2 ts=2
-au BufRead,BufNewFile *.c,*.h set cin ai nu sw=4 ts=4 expandtab
+au BufRead,BufNewFile *.c,*.h set cin ai nu sw=8 ts=8
 au BufRead,BufNewFile *.py set ai et nu sw=4 ts=4 tw=80 colorcolumn=80
 au BufRead,BufNewFile *.pl set ai et nu sw=2 ts=2 tw=80 expandtab
 au BufRead,BufNewFile *.hs set ai et nu sw=4 ts=4 tw=80
@@ -285,4 +290,7 @@ fun! ShowFuncName()
   call search("\\%" . lnum . "l" . "\\%" . col . "c")
 endfun
 nnoremap <leader>f :call ShowFuncName() <CR>
+
+
+tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 

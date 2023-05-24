@@ -135,6 +135,8 @@ let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+Plug 'github/copilot.vim'
+
 
 " All of your Plugs must be added before the following line
 call plug#end()

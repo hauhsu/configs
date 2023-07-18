@@ -135,7 +135,13 @@ let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
+
+" Vim mark
+Plug 'inkarkat/vim-mark'
+
+" Vim mark dependency
+Plug 'inkarkat/vim-ingo-library'
 
 
 " All of your Plugs must be added before the following line
@@ -218,7 +224,7 @@ function! QuickfixToggle()
 endfunction
 
 "Toggle number
-nnoremap <leader>n :setlocal number!<cr>
+nnoremap <leader>nu :setlocal number!<cr>
 
 "Toggle paste mode
 nnoremap <leader>p :setlocal paste!<cr>

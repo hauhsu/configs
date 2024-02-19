@@ -114,3 +114,7 @@ bindkey '^N' history-beginning-search-forward
 if [ -f ~/.zshrc.local ]; then
 	source ~/.zshrc.local
 fi
+
+__git_prompt_git () {
+	GIT_OPTIONAL_LOCKS=0 command timeout 1s git "$@"
+}

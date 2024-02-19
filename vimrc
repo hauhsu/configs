@@ -50,10 +50,12 @@ Plug 'honza/vim-snippets'
 " file browser
 Plug 'scrooloose/nerdtree'
 nnoremap <leader>t :NERDTreeToggle<CR>
-  " open nerdtree in current file dir
-map <Leader>nt :NERDTree %:p:h<CR>
-  " NERDTress File highlighting
+" open nerdtree in current file dir
+nnoremap <Leader>nt :NERDTree %:p:h<CR>
+" NERDTress File highlighting
 let NERDTreeIgnore=['\.o$']
+" Open the existing NERDTree on each new tab.
+autocmd BufWinEnter * if &buftype != 'quickfix' && getcmdwintype() == '' | silent NERDTreeMirror | endif
 
 
 " c++/python source overview
@@ -108,9 +110,9 @@ Plug 'dkprice/vim-easygrep'
 Plug 'easymotion/vim-easymotion'
 
 
-"
-Plug 'sjl/gundo.vim'
-nnoremap <F7> :GundoToggle<CR>
+" Vim undo tree
+Plug 'simnalamburt/vim-mundo'
+nnoremap <F5> :MundoToggle<CR>
 
 Plug 'CodeFalling/fcitx-vim-osx'
 
@@ -144,6 +146,12 @@ Plug 'inkarkat/vim-mark'
 Plug 'inkarkat/vim-ingo-library'
 
 
+" Diff part of the files
+Plug 'AndrewRadev/linediff.vim'
+noremap <leader>ldt :Linediff<CR>
+noremap <leader>ldo :LinediffReset<CR>
+
+
 " All of your Plugs must be added before the following line
 call plug#end()
 
@@ -162,25 +170,27 @@ augroup END
 "General configurations
 syntax on
 colorscheme desert
-set nu
+set number relativenumber
 set hlsearch
 set tabstop=4
 set shiftwidth=4
 set autoindent
 set backspace=indent,eol,start
 set ruler
-set noexpandtab
+set expandtab
 set mouse=r
-"set cursorcolumn
-"
 set statusline+=%F
 
+"don't auto comment the first character
+"https://superuser.com/a/271024
+set formatoptions-=cro
+set formatoptions-=c formatoptions-=r formatoptions-=o
 
 "Specific file type setting
-au BufRead,BufNewFile *.cpp,*.hpp set cin ai nu sw=2 ts=2 
+au BufRead,BufNewFile *.cpp,*.hpp set cin ai nu sw=2 ts=2 et
 au BufRead,BufNewFile *.sh set cin ai nu sw=4 ts=4 expandtab
 au BufRead,BufNewFile *.v set cin ai et nu sw=2 ts=2
-au BufRead,BufNewFile *.c,*.h set cin ai nu sw=8 ts=8
+au BufRead,BufNewFile *.c,*.h set cin ai nu sw=2 ts=8 expandtab
 au BufRead,BufNewFile *.py set ai et nu sw=4 ts=4 tw=80 colorcolumn=80
 au BufRead,BufNewFile *.pl set ai et nu sw=2 ts=2 tw=80 expandtab
 au BufRead,BufNewFile *.hs set ai et nu sw=4 ts=4 tw=80
@@ -192,7 +202,7 @@ au BufRead,BufNewFile Jenkinsfile.* set filetype=Jenkinsfile sw=4 ts=4 expandtab
 au BufRead,BufNewFile *.jenkinsfile set filetype=Jenkinsfile sw=4 ts=4 expandtab
 au BufRead,BufNewFile *.groovy set filetype=Jenkinsfile sw=4 ts=4 expandtab
 au BufRead,BufNewFile *.xml set filetype=xml sw=2 ts=2 expandtab
-au BufNewFile,BufRead *.s,*.S set filetype=arm " arm = armv6/7
+au BufNewFile,BufRead *.s,*.S set expandtab filetype=arm " a
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 
@@ -298,6 +308,7 @@ fun! ShowFuncName()
   call search("\\%" . lnum . "l" . "\\%" . col . "c")
 endfun
 nnoremap <leader>f :call ShowFuncName() <CR>
+nnoremap <leader>nu :set number! relativenumber! <CR>
 
 
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"

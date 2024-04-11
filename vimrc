@@ -151,6 +151,13 @@ Plug 'AndrewRadev/linediff.vim'
 noremap <leader>ldt :Linediff<CR>
 noremap <leader>ldo :LinediffReset<CR>
 
+" Minimap like vscode
+Plug 'wfxr/minimap.vim'
+let g:minimap_width = 20
+let g:minimap_auto_start = 0
+let g:minimap_auto_start_win_enter = 0
+noremap <leader>mm :MinimapToggle<CR>
+
 
 " All of your Plugs must be added before the following line
 call plug#end()
@@ -172,8 +179,8 @@ syntax on
 colorscheme desert
 set number relativenumber
 set hlsearch
-set tabstop=4
-set shiftwidth=4
+set tabstop=8
+set shiftwidth=8
 set autoindent
 set backspace=indent,eol,start
 set ruler
@@ -181,10 +188,6 @@ set expandtab
 set mouse=r
 set statusline+=%F
 
-"don't auto comment the first character
-"https://superuser.com/a/271024
-set formatoptions-=cro
-set formatoptions-=c formatoptions-=r formatoptions-=o
 
 "Specific file type setting
 au BufRead,BufNewFile *.cpp,*.hpp set cin ai nu sw=2 ts=2 et
@@ -204,6 +207,11 @@ au BufRead,BufNewFile *.groovy set filetype=Jenkinsfile sw=4 ts=4 expandtab
 au BufRead,BufNewFile *.xml set filetype=xml sw=2 ts=2 expandtab
 au BufNewFile,BufRead *.s,*.S set expandtab filetype=arm " a
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+"don't auto comment the first character
+"https://superuser.com/a/271024
+set formatoptions-=cro
+set formatoptions-=c formatoptions-=r formatoptions-=o
 
 
 "Edit and source vimrc
@@ -310,6 +318,48 @@ endfun
 nnoremap <leader>f :call ShowFuncName() <CR>
 nnoremap <leader>nu :set number! relativenumber! <CR>
 
+fun! SetGnuStyle()
+  setlocal cindent
+  setlocal cinoptions=>4,n-2,{2,^-2,:2,=2,g0,h2,p5,t0,+2,(0,u0,w1,m1
+  setlocal shiftwidth=2
+  setlocal softtabstop=2
+  setlocal textwidth=79
+  setlocal fo-=ro fo+=cql
+endfun
+nnoremap <leader>gnu :call SetGnuStyle() <CR>
 
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 
+" Add table index
+fu! MyTabLabel(n)
+let buflist = tabpagebuflist(a:n)
+let winnr = tabpagewinnr(a:n)
+let string = fnamemodify(bufname(buflist[winnr - 1]), ':t')
+return empty(string) ? '[unnamed]' : string
+endfu
+
+fu! MyTabLine()
+let s = ''
+for i in range(tabpagenr('$'))
+" select the highlighting
+    if i + 1 == tabpagenr()
+    let s .= '%#TabLineSel#'
+    else
+    let s .= '%#TabLine#'
+    endif
+
+    " set the tab page number (for mouse clicks)
+    "let s .= '%' . (i + 1) . 'T'
+    " display tabnumber (for use with <count>gt, etc)
+    let s .= ' '. (i+1) . ' ' 
+
+    " the label is made by MyTabLabel()
+    let s .= ' %{MyTabLabel(' . (i + 1) . ')} '
+
+    if i+1 < tabpagenr('$')
+        let s .= ' |'
+    endif
+endfor
+return s
+endfu
+set tabline=%!MyTabLine()
